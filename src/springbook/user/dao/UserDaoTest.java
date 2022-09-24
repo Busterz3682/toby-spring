@@ -11,15 +11,14 @@ public class UserDaoTest {
 		UserDao dao = new UserDao();
 		
 		User user = new User();
-		user.setId("testid2");
-		user.setName("testname2");
-		user.setPassword("testpassword2");
+		user.setId("testid5");
+		user.setName("testname5");
+		user.setPassword("testpassword5");
 		
 		dao.add(user);
 		System.out.println(user.getId() + " 등록 성공");
 		
-		User user2 = new User();
-		dao.get(user.getId());
+		User user2 = dao.get(user.getId());
 		System.out.println(user2.getId());
 		System.out.println(user2.getName());
 		System.out.println(user2.getPassword());
