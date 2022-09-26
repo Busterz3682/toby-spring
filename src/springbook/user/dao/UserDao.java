@@ -17,11 +17,17 @@ import springbook.user.domain.User;
  *작업중에 생성된 Connection, Statement, ResultSet같은 리소스는 작업을 마친 후 닫아준다
  *JDBC API가 만들어내는 예외를 잡아서 직접 처리하거나, 메소드에 throws를 선언해서 예외가 발생하면 메소드 밖으로 던지게 한다 
  */
-public abstract class UserDao {
+public class UserDao {
+	
+	private ConnectionMaker connectionMaker;
+	
+	public UserDao() {
+		connectionMaker = new NConnectionMaker();
+	}
 	
 	public void add(User user) throws ClassNotFoundException, SQLException {
 		
-		Connection c = getConnection();
+		Connection c = connectionMaker.makeConnection();
 		
 		PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
 		ps.setString(1, user.getId());
@@ -36,7 +42,7 @@ public abstract class UserDao {
 	
 	public User get(String id) throws ClassNotFoundException, SQLException {
 		
-		Connection c = getConnection();
+		Connection c = connectionMaker.makeConnection();
 		
 		PreparedStatement ps = c.prepareStatement("select * from users where id=?");
 		ps.setString(1, id);
@@ -54,7 +60,5 @@ public abstract class UserDao {
 		
 		return user;
 	}
-	
-	public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 	
 }

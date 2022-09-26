@@ -8,12 +8,12 @@ public class UserDaoTest {
 	
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		
-		NUserDao dao = new NUserDao();
+		UserDao dao = new UserDao();
 		
 		User user = new User();
-		user.setId("ntestid");
-		user.setName("ntestnamen");
-		user.setPassword("ntestpassword");
+		user.setId("INtestid");
+		user.setName("INtestname");
+		user.setPassword("INtestpassword");
 		
 		dao.add(user);
 		System.out.println(user.getId() + " 등록 성공");
